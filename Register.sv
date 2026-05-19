@@ -6,7 +6,11 @@ module Register#(parameter N)(
 );
 
 always_ff @(posedge CLK or negedge reset_n) begin
-    q <= d;
+    if (reset_n === 1'b0) begin
+        q <= 1'h0;
+	end else begin
+		  q <= d;
+	end
 end
 
 endmodule

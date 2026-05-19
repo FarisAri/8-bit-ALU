@@ -1,3 +1,11 @@
+/*
+Subtraction module: Recieves two 8-bit inputs and produces 
+an 8-bit output that is the difference of the two as well as
+an underflow bit
+
+-Trenton Hamilton
+*/
+
 module Subtraction(
     input logic [7:0] a, b,
     output logic [7:0] y
