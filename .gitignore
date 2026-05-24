@@ -1,0 +1,12 @@
+db/
+incremental_db/
+*.qpf
+*.bak
+output_files/
+simulation/
+*.mpf
+*.mpf_new
+work/
+transcript
+*.wlf
+

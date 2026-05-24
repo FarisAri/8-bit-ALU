@@ -1,9 +1,9 @@
 module Bitwise_XOR(
     input logic [7:0] a,
     input logic [7:0] b,
-    output logic y
+    output logic [7:0] y
 );
 
-assign y = ^(a ^ b);
+assign y = a ^ b;
 
 endmodule
