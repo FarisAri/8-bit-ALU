@@ -1,7 +1,7 @@
-// do file
-// Anthony Nguyen
-// 5/24
-// sources: .do files from lab 5
+# do file
+# Anthony Nguyen
+# 5/24
+# sources: .do files from lab 5
 
 # Compile all SystemVerilog source files
 vlog -sv Addition.sv
@@ -15,7 +15,7 @@ vlog -sv SevenSegmentDecode.sv
 vlog -sv ALU.sv
 vlog -sv ALU_tb.sv
 
-# Elaborate and simulate the testbench
+# Simulate the testbench
 vsim ALU_tb
 
 # Add waveforms with labels
@@ -36,7 +36,7 @@ add wave -label "Segment 3" /ALU_tb/segment3
 add wave -label "Segment 4" /ALU_tb/segment4
 add wave -label "Segment 5" /ALU_tb/segment5
 
-# Run the simulation to completion
+# Run the simulation
 run -all
 
 
