@@ -6,6 +6,8 @@
 # Compile all SystemVerilog source files
 vlog -sv Addition.sv
 vlog -sv Subtraction.sv
+vlog -sv Multiplication.sv
+vlog -sv Modulo.sv
 vlog -sv Bitwise_AND.sv
 vlog -sv Bitwise_OR.sv
 vlog -sv Bitwise_XOR.sv

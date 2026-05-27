@@ -98,6 +98,9 @@ module ALU_tb;
         run_test(8'd12,  8'd5,   4'b0101, 8'd9,   1'b0, "Test 5: BITWISE XOR 12 ^ 5");
         run_test(8'd8,   8'd4,   4'b0110, 8'd12,  1'b0, "Test 6: BITWISE OR 8 | 4");
         run_test(8'd255, 8'd1,   4'b0000, 8'd0,   1'b1, "Test 7: ADD 255 + 1 (Overflow)");
+        run_test(8'd11,  8'd3,   4'b1000, 8'd2,   1'b0, "Test 8: MODULO 11 % 3");
+        run_test(8'd30,  8'd4,   4'b0111, 8'd120, 1'b0, "Test 9: MULTIPLY 30 * 4");
+        run_test(8'd200, 8'd2,   4'b0111, 8'd144, 1'b1, "Test 10: MULTIPLY 200 * 2 (Overflow)");
         
         // Print summary
         $display("Total Tests:  %d", total_tests);

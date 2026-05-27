@@ -26,8 +26,9 @@ logic [7:0] y; // Output of ALU operations
 logic [3:0] opcode; // ALU operation code (stored during state 10)
 
 // ALU operator outputs
-logic [7:0] add_sum, sub_result, and_result, xor_result, or_result, output_a_result, output_b_result;
-logic add_carry;
+logic [7:0] add_sum, sub_result, and_result, xor_result, or_result, 
+            output_a_result, output_b_result, mult_result, mod_result;
+logic add_carry, mult_overflow;
 
 // Operator instantiations
 Addition add_inst (
@@ -69,6 +70,19 @@ Output_Operand output_a_inst (
 Output_Operand output_b_inst (
     .a(reg2),
     .y(output_b_result)
+);
+
+Multiplication mult_inst (
+    .a(reg1),
+    .b(reg2),
+    .y(mult_result),
+    .overflow(mult_overflow)
+);
+
+Modulo mod_inst (
+    .a(reg1),
+    .b(reg2),
+    .y(mod_result)
 );
 
 // Display logic 
@@ -143,6 +157,14 @@ always_comb begin
         end
         4'b0110: begin // OR
             y = or_result;
+            carry_out = 0;
+        end
+        4'b0111: begin // Multiply
+            y = mult_result;
+            carry_out = mult_overflow;
+        end
+        4'b1000: begin // Modulo
+            y = mod_result;
             carry_out = 0;
         end
         default: begin
