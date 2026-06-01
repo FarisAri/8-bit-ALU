@@ -1,10 +1,8 @@
-/*
-Subtraction module: Recieves two 8-bit inputs and produces 
-an 8-bit output that is the difference of the two as well as
-an underflow bit
-
--Trenton Hamilton
-*/
+// Project : Subtraction
+// Author  : Trenton Hamilton
+// Date    : 6/1/2026
+// Description: Subtracts two 8-bit numbers
+// Sources : None
 
 module Subtraction(
     input logic [7:0] a, b,

@@ -1,10 +1,8 @@
-/*
-Addition module: Recieves two 8-bit inputs and produces 
-an 8-bit output that is the sum of the two as well as
-an overflow bit
-
--Trenton Hamilton
-*/
+// Project : Addition
+// Author  : Trenton Hamilton
+// Date    : 6/1/2026
+// Description: Adds two 8-bit numbers and detects overflow
+// Sources : None
 
 module Addition(
     input logic [7:0] a, b,
