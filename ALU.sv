@@ -25,91 +25,8 @@ logic [7:0] reg1, reg2;
 logic [7:0] y; // Output of ALU operations
 logic [3:0] opcode; // ALU operation code (stored during state 10)
 
-// ALU operator outputs
-logic [7:0] add_sum, sub_result, and_result, xor_result, or_result, 
-            output_a_result, output_b_result, mult_result, mod_result;
-logic add_carry, mult_overflow;
 
-// Operator instantiations
-Addition add_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(add_sum),
-    .overflow(add_carry)
-);
 
-Subtraction sub_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(sub_result)
-);
-
-Bitwise_AND and_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(and_result)
-);
-
-Bitwise_XOR xor_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(xor_result)
-);
-
-Bitwise_OR or_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(or_result)
-);
-
-Output_Operand output_a_inst (
-    .a(reg1),
-    .y(output_a_result)
-);
-
-Output_Operand output_b_inst (
-    .a(reg2),
-    .y(output_b_result)
-);
-
-Multiplication mult_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(mult_result),
-    .overflow(mult_overflow)
-);
-
-Modulo mod_inst (
-    .a(reg1),
-    .b(reg2),
-    .y(mod_result)
-);
-
-// Display logic 
-SevenSegmentDecode decode1 (
-    .digit(reg1[7:4]),
-    .segments(segment5)
-);
-SevenSegmentDecode decode2 (
-    .digit(reg1[3:0]),
-    .segments(segment4)
-);
-SevenSegmentDecode decode3 (
-    .digit(reg2[7:4]),
-    .segments(segment3)
-);
-SevenSegmentDecode decode4 (
-    .digit(reg2[3:0]),
-    .segments(segment2)
-);
-SevenSegmentDecode decode5 (
-    .digit(y[7:4]),
-    .segments(segment1)
-);
-SevenSegmentDecode decode6 (
-    .digit(y[3:0]),
-    .segments(segment0)
-);
 
 // Register instantiations with enable signals
 Register reg1_inst (
@@ -128,51 +45,27 @@ Register reg2_inst (
     .q(reg2)
 );
 
-// Combinational logic to select ALU output and carry based on opcode
-always_comb begin
-    case (opcode)
-        4'b0000: begin // Add
-            y = add_sum;
-            carry_out = add_carry;
-        end
-        4'b0001: begin // Subtract
-            y = sub_result;
-            carry_out = 0;
-        end
-        4'b0010: begin // AND
-            y = and_result;
-            carry_out = 0;
-        end
-        4'b0011: begin // Output A
-            y = output_a_result;
-            carry_out = 0;
-        end
-        4'b0100: begin // Output B
-            y = output_b_result;
-            carry_out = 0;
-        end
-        4'b0101: begin // XOR
-            y = xor_result;
-            carry_out = 0;
-        end
-        4'b0110: begin // OR
-            y = or_result;
-            carry_out = 0;
-        end
-        4'b0111: begin // Multiply
-            y = mult_result;
-            carry_out = mult_overflow;
-        end
-        4'b1000: begin // Modulo
-            y = mod_result;
-            carry_out = 0;
-        end
-        default: begin
-            y = 8'b0;
-            carry_out = 0;
-        end
-    endcase
-end
+// Opcode decoder instantiation
+Opcode_decode opcode_decode_inst (
+    .opcode(opcode),
+    .reg1(reg1),
+    .reg2(reg2),
+    .y(y),
+    .carry_out(carry_out)
+);
+
+// Display instantiation
+Display display_inst (
+    .reg1(reg1),
+    .reg2(reg2),
+    .y(y),
+    .segment0(segment0),
+    .segment1(segment1),
+    .segment2(segment2),
+    .segment3(segment3),
+    .segment4(segment4),
+    .segment5(segment5)
+);
 
 // State machine for ALU operations
 always_ff @(posedge clk or posedge ~rst) begin

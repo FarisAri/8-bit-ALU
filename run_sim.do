@@ -16,6 +16,8 @@ vlog -sv Register.sv
 vlog -sv SevenSegmentDecode.sv
 vlog -sv ALU.sv
 vlog -sv ALU_tb.sv
+vlog -sv Display.sv
+vlog -sv Opcode_decode.sv
 
 # Simulate the testbench
 vsim ALU_tb
