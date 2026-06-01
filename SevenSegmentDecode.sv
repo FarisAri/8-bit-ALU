@@ -1,10 +1,8 @@
-/*
-SevenSegmentDecode module: Recieves a 4-bit input and 
-produces a 7-bit output that corresponds to the segments 
-to be displayed
-
--Trenton Hamilton
-*/
+// Project : Seven Segment Decoder
+// Author  : Trenton Hamilton
+// Date    : 6/1/2026
+// Description: Decodes a 4-bit input into 7-bit segment outputs for a seven-segment display
+// Sources : None
 
 module SevenSegmentDecode(
     input logic [3:0] digit,
