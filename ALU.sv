@@ -28,7 +28,7 @@ logic [3:0] opcode; // ALU operation code (stored during state 10)
 
 
 
-// Register instantiations with enable signals
+// Register instantiations
 Register reg1_inst (
     .CLK(clk),
     .reset_n(rst),
